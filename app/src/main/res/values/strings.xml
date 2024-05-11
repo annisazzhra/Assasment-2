@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Nama Aplikasi Anda</string>
+    <string name="tambah_tugas">Tambah Tugas</string>
+    <string name="list_kosong">Tidak Ada Tugas</string>
+    <string name="kembali">Kembali</string>
+    <string name="simpan">Simpan</string>
+    <string name="judul">Judul</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="tanggal_jatuh_tempo">Tanggal Jatuh Tempo</string>
+    <string name="tambah_catatan">Tambah Catatan</string>
+    <string name="edit_catatan">Edit Catatan</string>
+    <string name="edit_tugas">Edit Tugas</string>
+</resources>
