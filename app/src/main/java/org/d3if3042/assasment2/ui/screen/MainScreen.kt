@@ -1,9 +1,13 @@
 package org.d3if3042.assasment2.ui.screen
 
-
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -12,27 +16,32 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode.Companion.Screen
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import org.d3if3042.assasment2.R
+import org.d3if3042.assasment2.database.TugasDb
 import org.d3if3042.assasment2.model.Tugas
+import org.d3if3042.assasment2.navigation.Screen
 import org.d3if3042.assasment2.ui.theme.Assasment2Theme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Typography.*
-
-
+import org.d3if3042.assasment2.util.ViewModelFactory
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -70,8 +79,11 @@ fun MainScreen(navController: NavHostController) {
 
 @Composable
 fun ScreenContent(modifier: Modifier, navController: NavHostController) {
-    val viewModel: MainViewModel = viewModel()
-    val data = viewModel.data
+    val context = LocalContext.current
+    val db = TugasDb.getInstance(context = context)
+    val factory = ViewModelFactory(db.dao)
+    val viewModel: MainViewModel = viewModel(factory = factory)
+    val data by viewModel.data.collectAsState()
 
     if (data.isEmpty()) {
         Column(
@@ -110,18 +122,20 @@ fun TugasItem(tugas: Tugas, onClick: () -> Unit) {
         Text(
             text = tugas.judul,
             maxLines = 1,
-            style = MaterialTheme.typography.subtitle1,
+            style = MaterialTheme.typography.headlineLarge, // Here's where you define the style
             modifier = Modifier.fillMaxWidth()
         )
+
         Text(
             text = tugas.deskripsi,
             maxLines = 2,
-            style = MaterialTheme.typography.body1,
+            style = MaterialTheme.typography.bodyLarge, // Here's where you define the style
             modifier = Modifier.fillMaxWidth()
         )
+
         Text(
             text = tugas.tanggalJatuhTempo,
-            style = MaterialTheme.typography.body2,
+            style = MaterialTheme.typography.bodyLarge, // Here's where you define the style
             modifier = Modifier.fillMaxWidth()
         )
     }

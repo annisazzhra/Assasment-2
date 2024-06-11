@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nama Aplikasi Anda</string>
+    <string name="app_name">Menugas</string>
     <string name="tambah_tugas">Tambah Tugas</string>
     <string name="list_kosong">Tidak Ada Tugas</string>
     <string name="kembali">Kembali</string>
@@ -10,4 +10,7 @@
     <string name="tambah_catatan">Tambah Catatan</string>
     <string name="edit_catatan">Edit Catatan</string>
     <string name="edit_tugas">Edit Tugas</string>
+    <string name="invalid">Judul isi tugas tidak boleh kosong</string>
+    <string name="lainnya">Opsi lainnya</string>\
+    <string name="hapus">Hapus Tugas</string>
 </resources>
